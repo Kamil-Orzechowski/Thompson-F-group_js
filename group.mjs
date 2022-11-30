@@ -10,6 +10,11 @@ export class FGroupElement {
         this.domainSubdivision = this.vertices.map(v => v[0]);
         this.imageSubdivision = this.vertices.map(v => v[1]);
     }
+    apply(number) {
+        let i = 0;
+        while(this.domainSubdivision[i + 1] < number) {i++;}
+        return this.imageSubdivision[i] + (number - this.domainSubdivision[i]) * this.slopes[i];
+    }
 }
 
 function getSlopes(points) {
@@ -19,4 +24,10 @@ function getSlopes(points) {
             / (points[i + 1][0] - points[i][0]));
     }
     return slopes;
+}
+
+export const zip = (arr1, arr2) => arr1.map((v, i) => [v, arr2[i]]);
+
+export function inverse(groupElement) {
+    return new FGroupElement(zip(groupElement.imageSubdivision, groupElement.domainSubdivision));
 }
