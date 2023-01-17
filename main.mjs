@@ -32,10 +32,12 @@ import {
 // const AB = compose(A, B);
 // console.log(AB.vertices);
 
-const element = getElementFromWord("A^{3}B^{-2}");
+const element = getElementFromWord("A^{3} b^{-2}");
 console.log(element.vertices);
 console.log(element.apply(5 / 16));
 
-const A = generators.A;
-const B_ = generators["B^{-1}"];
-console.log(A.apply(A.apply(A.apply(B_.apply(B_.apply(5 / 16))))));
+// const A = generators.A;
+// const B_ = generators["B^{-1}"];
+// console.log(A.apply(A.apply(A.apply(B_.apply(B_.apply(5 / 16))))));
+
+// console.log(getElementFromWord(""));

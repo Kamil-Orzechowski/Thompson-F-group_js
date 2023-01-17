@@ -74,14 +74,14 @@ export const generators = {
 generators["A^{-1}"] = inverse(generators.A);
 generators["B^{-1}"] = inverse(generators.B);
 
-export const Identity = new FGroupElement([
+export const IDENTITY = new FGroupElement([
   [0.0, 0.0],
   [1.0, 1.0],
 ]);
 
 function power(element, exponent) {
   if (exponent == 0) {
-    return Identity;
+    return IDENTITY;
   }
   let arr;
   if (exponent > 0) {
@@ -93,11 +93,11 @@ function power(element, exponent) {
 }
 
 export function getElementFromWord(string) {
-  const re = /(?<letter>[AB])(?:\^\{(?<exponent>-?[1-9]\d*)\})?/g;
+  const re = /(?<letter>[AB])(?:\^\{(?<exponent>-?[1-9]\d*)\})?/ig;
   const matches = [...string.matchAll(re)];
   const word = matches.map((x) => [
-    generators[x.groups.letter],
+    generators[x.groups.letter.toUpperCase()],
     x.groups.exponent ? parseInt(x.groups.exponent) : 1,
   ]);
-  return word.map((arr) => power(arr[0], arr[1])).reduce(compose, Identity);
+  return word.map((arr) => power(arr[0], arr[1])).reduce(compose, IDENTITY);
 }
