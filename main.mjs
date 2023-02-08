@@ -1,3 +1,5 @@
+import { getVertices } from "./group.mjs";
+
 const inputWord = document.getElementById("word");
 const validateBtn = document.getElementById("validate");
 const validityMsg = document.getElementById("validity");
@@ -11,8 +13,42 @@ validateBtn.addEventListener("click", () => {
     validityMsg.textContent = "Your input: ";
     wordInTeX.textContent =
       word != "" ? `g = ${word}` : `g = \\mathrm{identity}`;
+    plotBtn.removeAttribute("disabled");
   } else {
     validityMsg.textContent = "Invalid input!";
     wordInTeX.textContent = "";
+    plotBtn.setAttribute("disabled", "true")
   }
 });
+
+const plotBtn = document.getElementById("plot");
+const chart = document.getElementById("chart");
+
+plotBtn.addEventListener("click", () => {
+  plotElement(word);
+});
+
+function plotElement(string) {
+  var vertices = getVertices(string);
+  var data = [{
+    x: vertices.map((v) => v[0]),
+    y: vertices.map((v) => v[1]),
+    mode: "lines+markers"
+  }];
+
+  var layout = {
+    title: 'Graph of g',
+    xaxis: {
+      title: 'argument'
+    },
+    yaxis: {
+      title: 'value'
+    }
+  };
+
+  Plotly.newPlot(
+  chart, data, layout
+);
+}
+
+

@@ -1,4 +1,4 @@
-export class FGroupElement {
+class FGroupElement {
   constructor(points) {
     const slopes = getSlopes(points);
     const predicate = (item, index) =>
@@ -33,15 +33,15 @@ function getSlopes(points) {
   return slopes;
 }
 
-export const zip = (arr1, arr2) => arr1.map((v, i) => [v, arr2[i]]);
+const zip = (arr1, arr2) => arr1.map((v, i) => [v, arr2[i]]);
 
-export function inverse(groupElement) {
+function inverse(groupElement) {
   return new FGroupElement(
     zip(groupElement.imageSubdivision, groupElement.domainSubdivision)
   );
 }
 
-export function compose(element1, element2) {
+function compose(element1, element2) {
   const element2Inverse = inverse(element2);
   const preimages = element1.domainSubdivision.map((x) =>
     element2Inverse.apply(x)
@@ -56,7 +56,7 @@ export function compose(element1, element2) {
   );
 }
 
-export const generators = {
+const generators = {
   a: new FGroupElement([
     [0.0, 0.0],
     [0.25, 0.5],
@@ -74,7 +74,7 @@ export const generators = {
 generators["a^{-1}"] = inverse(generators.a);
 generators["b^{-1}"] = inverse(generators.b);
 
-export const identity = new FGroupElement([
+const identity = new FGroupElement([
   [0.0, 0.0],
   [1.0, 1.0],
 ]);
@@ -92,7 +92,7 @@ function power(element, exponent) {
   return arr.reduce(compose);
 }
 
-export function getElementFromWord(string) {
+function getElementFromWord(string) {
   const re = /(?<letter>[ab])(?:\^\{(?<exponent>-?[1-9]\d*)\})?/g;
   const matches = [...string.matchAll(re)];
   const word = matches.map((x) => [
@@ -101,3 +101,9 @@ export function getElementFromWord(string) {
   ]);
   return word.map((arr) => power(arr[0], arr[1])).reduce(compose, identity);
 }
+
+function getVertices(word) {
+  return getElementFromWord(word).vertices
+}
+
+export {getVertices}
