@@ -4,4 +4,7 @@ An element of the group is internally represented as an array of vertices ("brea
 of the corresponding unit interval homeomorphism.
 Some functionalities concerning combinatorial group theoretical properties will be added,
 as well as those connected with a tree diagram representation of group elements.
-A simple user interface will appear later.
+A simple user interface is under development.
+
+The project makes use of Frédéric Wang's [TeXZilla](https://github.com/fred-wang/TeXZilla) LaTeX-to-MathML converter
+and [Plotly.js](https://github.com/plotly/plotly.js) open-source graphing library.
