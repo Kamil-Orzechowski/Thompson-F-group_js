@@ -33,17 +33,22 @@ function plotElement(string) {
   var data = [{
     x: vertices.map((v) => v[0]),
     y: vertices.map((v) => v[1]),
-    mode: "lines+markers"
+    type: "scatter",
+    mode: "lines+markers",
+    hoverinfo: "x+y"
   }];
 
   var layout = {
     title: 'Graph of g',
     xaxis: {
-      title: 'argument'
+      title: 'argument',
+      hoverformat: '.12~e'
     },
     yaxis: {
-      title: 'value'
-    }
+      title: 'value',
+      hoverformat: '.12~e'
+    },
+    hovermode: "closest"
   };
 
   Plotly.newPlot(

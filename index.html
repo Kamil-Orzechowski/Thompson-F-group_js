@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Thompson F group</title>
+    <link rel="stylesheet" href="style.css">
     <script type="module" src="./main.mjs"></script>
     <!-- TeXZilla -->
     <script src="https://fred-wang.github.io/TeXZilla/TeXZilla-min.js"></script>
@@ -10,7 +11,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   </head>
 
-  <body style="font-size: 1.2em;">
+  <body>
     <section>
       <h1>
         Getting <span>F</span> group elements form words of standard generators
@@ -41,7 +42,7 @@
       <button id="validate">Validate</button>
       <p><span id="validity"></span><la-tex id="wordInTex"></la-tex></p>
       <button id="plot" disabled>Plot</button>
-      <div id="chart" style="width:600px;height:600px;"></div>
+      <div id="chart" class="plotly-chart"></div>
     </section>
   </body>
 </html>
