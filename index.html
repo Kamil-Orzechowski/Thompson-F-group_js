@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Thompson F group</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script type="module" src="./main.mjs"></script>
     <!-- TeXZilla -->
     <script src="https://fred-wang.github.io/TeXZilla/TeXZilla-min.js"></script>
@@ -13,6 +13,7 @@
 
   <body>
     <section>
+      <p></p>
       <h1>
         Getting <span>F</span> group elements form words of standard generators
       </h1>
@@ -34,13 +35,28 @@
       <p>
         Write below a word consisting of <la-tex>a, b</la-tex> or their non-zero
         integer powers in the LaTeX format.<br />
-        Example: a^{6} b^{-1} a b^{7}. Spaces are optional, curly braces are necessary. Empty word is allowed.<br/>
-        After successful validation you can plot the element as a piecewise linear bijection <la-tex>g: [0, 1] \to [0,1]</la-tex>.<br/>
+        Example: a^{6} b^{-1} a b^{7}. Spaces are optional, curly braces are
+        necessary. Empty word is allowed.<br />
+        After successful validation you can plot the element as a piecewise
+        linear bijection <la-tex>g: [0, 1] \to [0,1]</la-tex>.<br />
         Functions are composed applying first the rightmost one.
       </p>
       <input id="word" />
       <button id="validate">Validate</button>
       <p><span id="validity"></span><la-tex id="wordInTex"></la-tex></p>
+      <p>
+        Select point labelling format:
+        <input
+          type="radio"
+          id="commonFr"
+          name="option"
+          value="common"
+          checked
+        />
+        <label for="commonFr">common fraction</label>
+        <input type="radio" id="decimalFr" name="option" value="decimal" />
+        <label for="decimalFr">decimal</label>
+      </p>
       <button id="plot" disabled>Plot</button>
       <div id="chart" class="plotly-chart"></div>
     </section>
