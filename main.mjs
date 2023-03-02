@@ -13,7 +13,8 @@ validateBtn.addEventListener("click", () => {
     word = inputWord.value.trim();
     validityMsg.textContent = "Your input: ";
     wordInTeX.textContent =
-      word != "" ? `g = ${word}` : `g = \\mathrm{identity}`;
+      word != "" ? `\\(g = ${word}\\)` : `\\(g = \\mathrm{identity}\\)`;
+    MathJax.typeset();
     plotBtn.removeAttribute("disabled");
   } else {
     validityMsg.textContent = "Invalid input!";

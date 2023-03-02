@@ -4,24 +4,21 @@
     <title>Thompson F group</title>
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="./main.mjs"></script>
-    <!-- TeXZilla -->
-    <script src="https://fred-wang.github.io/TeXZilla/TeXZilla-min.js"></script>
-    <script src="https://fred-wang.github.io/TeXZilla/examples/customElement.js"></script>
+    <!-- MathJax -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <!-- Plotly.js -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  </head>
-
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script></head>
   <body>
     <section>
       <p></p>
       <h1>
-        Getting <span>F</span> group elements form words of standard generators
+        Getting <span>\(F\)</span> group elements form words of standard generators
       </h1>
       <p>
-        Denote by <la-tex>a, b: [0,1] \to [0,1]</la-tex> the following elements
+        Let us denote by \(a, b: [0,1] \to [0,1]\) the following elements
         (so called <em>standard generators</em>) of the Thompson
-        <la-tex>F</la-tex> group:
-        <la-tex display="block">
+        \(F\) group:
+        \[
           a(t)= \begin{cases} 2t & \text{for } 0\leq t\leq \frac{1}{4},\\ t +
           \frac{1}{4} & \text{for } \frac{1}{4} \leq t \leq \frac{1}{2},\\
           \frac{t}{2} + \frac{1}{2} & \text{for } \frac{1}{2} \leq t \leq 1;
@@ -30,20 +27,20 @@
           \frac{5}{8},\\ t + \frac{1}{8} & \text{for } \frac{5}{8} \leq t \leq
           \frac{3}{4},\\ \frac{t}{2} + \frac{1}{2} & \text{for } \frac{3}{4}
           \leq t \leq 1. \end{cases}
-        </la-tex>
+        \]
       </p>
       <p>
-        Write below a word consisting of <la-tex>a, b</la-tex> or their non-zero
+        Write below a word consisting of \(a, b\) or their non-zero
         integer powers in the LaTeX format.<br />
         Example: a^{6} b^{-1} a b^{7}. Spaces are optional, curly braces are
         necessary. Empty word is allowed.<br />
         After successful validation you can plot the element as a piecewise
-        linear bijection <la-tex>g: [0, 1] \to [0,1]</la-tex>.<br />
+        linear bijection \(g: [0, 1] \to [0,1]\).<br />
         Functions are composed applying first the rightmost one.
       </p>
       <input id="word" />
       <button id="validate">Validate</button>
-      <p><span id="validity"></span><la-tex id="wordInTex"></la-tex></p>
+      <p><span id="validity"></span><span id="wordInTex"></span></p>
       <p>
         Select point labelling format:
         <input
