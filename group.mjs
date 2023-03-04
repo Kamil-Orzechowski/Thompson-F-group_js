@@ -1,3 +1,11 @@
+import { parseDyadic } from "./fraction-converter.mjs";
+import {
+  BinaryTree,
+  append,
+  createBalancedTree,
+  removeChildren,
+} from "./trees.mjs";
+
 class FGroupElement {
   constructor(points) {
     const slopes = getSlopes(points);
@@ -103,7 +111,67 @@ function getElementFromWord(string) {
 }
 
 function getVertices(word) {
-  return getElementFromWord(word).vertices
+  return getElementFromWord(word).vertices;
 }
 
-export {getVertices}
+function getTreePair(groupElement) {
+  const subdivisions = [
+    groupElement.domainSubdivision,
+    groupElement.imageSubdivision,
+  ];
+  const depths = subdivisions.map((list) =>
+    Math.max(...list.map((x) => parseDyadic(x)[1]))
+  );
+  const trees = depths.map(createBalancedTree);
+  const leafLists = trees.map((t) => t.getLeaves());
+  const blowupExponents = groupElement.slopes.map(
+    (x) => Math.log2(x) + depths[1] - depths[0]
+  );
+  const blowup = (i, j) => {
+    const start = subdivisions[i][j] * 2 ** depths[i];
+    const stop = subdivisions[i][j + 1] * 2 ** depths[i];
+    for (let k = start; k < stop; k++) {
+      append(leafLists[i][k], createBalancedTree(Math.abs(blowupExponents[j])));
+    }
+  };
+  for (let j = 0; j < blowupExponents.length; j++) {
+    if (blowupExponents[j] > 0) {
+      blowup(0, j);
+    }
+    if (blowupExponents[j] < 0) {
+      blowup(1, j);
+    }
+  }
+  if (trees[0].getNodes().length > 1) {
+    let reductionDone;
+    do {
+      reductionDone = false;
+      const domainLeaves = trees[0].getLeaves();
+      const imageLeaves = trees[1].getLeaves();
+      let i = 0;
+      while (i < domainLeaves.length - 1) {
+        const domainParent = domainLeaves[i].parent;
+        const imageParent = imageLeaves[i].parent;
+        if (
+          domainParent.rightSubtree === domainLeaves[i + 1] &&
+          imageParent.rightSubtree === imageLeaves[i + 1]
+        ) {
+          removeChildren(domainParent);
+          removeChildren(imageParent);
+          reductionDone = true;
+          i += 2;
+        } else i += 1;
+      }
+    } while (reductionDone);
+  }
+  return trees;
+}
+
+export { getVertices };
+
+/* const testElement = generators.a;
+const treePair = getTreePair(testElement);
+const domainLeaves = treePair[0].getLeaves().map((leaf) => leaf.binaryCode);
+const imageLeaves = treePair[1].getLeaves().map((leaf) => leaf.binaryCode);
+console.log(domainLeaves);
+console.log(imageLeaves); */

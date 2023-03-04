@@ -16,4 +16,4 @@ function writeDyadic(x) {
   return data[1] == 0 ? `${data[0]}` : `${data[0]}/${2 ** data[1]}`;
 }
 
-export { writeDyadic };
+export { parseDyadic, writeDyadic };
